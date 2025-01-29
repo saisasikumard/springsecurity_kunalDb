@@ -42,6 +42,10 @@ public class PersonController {
         logger.info("Entered in welcome method");
         return "Welcome to public space..";
     }
+    @GetMapping("/admin")
+    public String adminGreet(){
+       return "Welcome to admin space";
+    }
 
     //Api to create jwt token
     @PostMapping("/authenticate")
