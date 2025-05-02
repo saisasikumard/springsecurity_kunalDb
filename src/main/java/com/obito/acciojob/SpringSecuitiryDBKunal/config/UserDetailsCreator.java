@@ -16,7 +16,7 @@ public class UserDetailsCreator  implements UserDetails {
     public UserDetailsCreator(Person person) {
         this.userName=person.getUserName();
         this.password= person.getPassword();
-        String roles[] =person.getRole().split(",");
+        String roles[] =person.getRole().split(",");//"has_User,has_Admin"
         List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
         for(String role:roles){
             SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority(role);

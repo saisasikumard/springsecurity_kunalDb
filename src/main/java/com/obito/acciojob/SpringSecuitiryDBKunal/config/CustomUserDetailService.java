@@ -21,7 +21,6 @@ public class CustomUserDetailService implements UserDetailsService {
         if(person==null){
             throw new RuntimeException("UserName not exist ...");
         }
-
         return new UserDetailsCreator(person);
     }
 }

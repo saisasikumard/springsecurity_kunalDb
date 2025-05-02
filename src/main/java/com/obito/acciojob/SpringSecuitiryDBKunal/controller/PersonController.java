@@ -7,6 +7,7 @@ import com.obito.acciojob.SpringSecuitiryDBKunal.service.PersonService;
 import jakarta.persistence.GeneratedValue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,15 +29,18 @@ public class PersonController {
     private PersonService personService;
    // @PostMapping("/add")
    @PostMapping("/add")
+   @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addStudent(@RequestBody Person person){
        logger.info("Inside addStudent method...");
        return  personService.addStudent(person);
 
     }
     @GetMapping("/find")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public Person find(@RequestParam("userName") String userName){
         return personService.find(userName);
     }
+
     @GetMapping("/public")
     public String welcome(){
         logger.info("Entered in welcome method");
