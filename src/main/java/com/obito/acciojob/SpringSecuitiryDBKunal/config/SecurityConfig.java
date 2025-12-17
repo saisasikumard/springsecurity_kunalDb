@@ -39,7 +39,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/person/authenticate") // Add this specific matcher
+                        .requestMatchers("/person/authenticate","/person/add") // Add this specific matcher
                         .permitAll()
                         .anyRequest().authenticated())
                         .sessionManagement(session -> session

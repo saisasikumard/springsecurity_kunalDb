@@ -29,14 +29,14 @@ public class PersonController {
     private PersonService personService;
    // @PostMapping("/add")
    @PostMapping("/add")
-   @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+   //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addStudent(@RequestBody Person person){
+       person.setRole("ROLE_USER");
        logger.info("Inside addStudent method...");
        return  personService.addStudent(person);
-
     }
     @GetMapping("/find")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
+ //   @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public Person find(@RequestParam("userName") String userName){
         return personService.find(userName);
     }
@@ -54,6 +54,7 @@ public class PersonController {
     //Api to create jwt token
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest){
+        logger.info("entered authenticated method..,before authentication");
       Authentication authentication =authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(),authRequest.getPassword()));
        logger.info("entered authenticated method...");
        if(authentication.isAuthenticated()) {
